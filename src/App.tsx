@@ -1,20 +1,51 @@
-function App() {
+// src/App.jsx
 
+// BrowserRouter
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from "react";
+
+// Layout Component
+import LayoutDefault from "@/layout";
+
+// Pages
+import {
+  Landing,
+  GayaHidup,
+  Hiburan,
+  Internasional,
+  Nasional,
+  Olahraga,
+  Terbaru,
+} from "@/pages";
+
+const App: React.FC = () => {
   return (
-    <>
-    <div className="container *:mx-auto p-4">
-      <h1 className="text-3xl font-bold underline">
-        Hello, Vite + React + Tailwind CSS!
-      </h1>
-      <p className="mt-4 text-lg">
-        This is a simple setup to get you started with Vite, React, and Tailwind CSS.
-      </p>
+    <BrowserRouter>
+      <Routes>
+        {/*
+          Route induk ini akan merender LayoutDefault.
+          Semua <Route> yang didefinisikan di dalam ini akan menjadi anak-anaknya
+          dan akan dirender di dalam <Outlet /> di LayoutDefault.
+        */}
+        <Route path="/" element={<LayoutDefault />}>
+          {/*
+            Definisikan semua rute anak langsung di sini.
+            Path-nya akan relatif terhadap parent LayoutDefault.
+          */}
+          <Route index element={<Landing />} />
+          <Route path="gayahidup" element={<GayaHidup />} />
+          <Route path="hiburan" element={<Hiburan />} />
+          <Route path="internasional" element={<Internasional />} />
+          <Route path="nasional" element={<Nasional />} />
+          <Route path="olahraga" element={<Olahraga />} />
+          <Route path="terbaru" element={<Terbaru />} />
 
-    </div>
+          {/* Opsional: Rute untuk 404 Not Found (jika ada URL yang tidak cocok) */}
+          {/* <Route path="*" element={<div>Halaman Tidak Ditemukan (404)</div>} /> */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
-
-    </>
-  )
-}
-
-export default App
+export default App;
