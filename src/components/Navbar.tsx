@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 
 import {
   NavigationMenu,
@@ -16,6 +16,7 @@ import SealLogo from '@/assets/Seal-Logo.webp';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const location = useLocation();
 
   const navItems = [
     { name: "Beranda", href: "/" },
@@ -27,38 +28,46 @@ const Navbar = () => {
     { name: "Internasional", href: "/internasional" },
   ];
 
+  const isActiveItem = (href: string) => {
+    if (href === "/") {
+      return location.pathname === "/";
+    }
+    return location.pathname === href || location.pathname.startsWith(href + "/");
+  };
+
   return (
     <nav className="bg-white py-8 shadow-sm relative z-10">
-      <div className='container mx-auto px-4 md:px-8 lg:px-18 flex justify-between items-center'>
+      {/* Container utama navbar */}
+      <div className='container mx-auto px-4 md:px-8 lg:px-16 flex justify-between items-center'>
         {/* Logo / Brand (kiri) */}
-        <div className="flex items-center">
+        <div className="flex items-center flex-shrink-0">
           <Link to="/" className="flex items-center space-x-2">
             <picture>
-                <img src={SealLogo} alt="Berita Kini Logo" className="h-8 w-auto" />
+                <img src={SealLogo} alt="Berita Kini Logo" className="h-10 w-auto" />
             </picture>
             <span className="text-[#111B26] text-xl font-semibold">Berita Kini</span>
           </Link>
         </div>
 
         {/* Menu Navigasi Desktop (kanan) */}
-        <div className="hidden md:flex items-center">
+        <div className="hidden md:flex items-center md:ml-8 lg:ml-12">
           <NavigationMenu>
-            <NavigationMenuList className="gap-x-8"> {/* Menggunakan gap-x-8 untuk jarak antar item */}
+            <NavigationMenuList className="gap-x-[10px]">
               {navItems.map((item) => (
                 <NavigationMenuItem key={item.name}>
                   <NavigationMenuLink asChild>
                     <NavLink
                       to={item.href}
-                      className={({ isActive }) =>
-                        `text-base font-medium transition-colors duration-200 ${
-                          isActive
-                            ? 'text-[#0090FF]' // Warna biru (#0090FF) jika aktif
-                            : 'text-[#828282] hover:text-[#0090FF]' // Warna abu-abu (#828282) jika tidak aktif, dan biru saat hover
-                        }`
-                      }
+                      className="text-base font-medium transition-colors duration-200"
                       end={item.href === "/"}
                     >
-                      {item.name}
+                      <span className={
+                        isActiveItem(item.href)
+                          ? 'text-[#0090FF] text-center'
+                          : 'text-[#828282] hover:text-[#0090FF] focus:text-[#0090FF] text-center'
+                      }>
+                        {item.name}
+                      </span>
                     </NavLink>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
@@ -81,7 +90,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Content */}
+      {/* Konten Menu Mobile */}
       {isMenuOpen && (
         <div className="md:hidden bg-white py-4 px-4 border-t border-gray-200 shadow-lg">
           <ul className="flex flex-col space-y-2">
@@ -89,14 +98,12 @@ const Navbar = () => {
               <li key={item.name}>
                 <NavLink
                   to={item.href}
-                  className={({ isActive }) =>
-                    `block py-2 text-base font-medium ${
-                      isActive
-                        ? 'text-[#0090FF]'
-                        : 'text-[#828282] hover:text-[#0090FF]'
-                    }`
+                  className={
+                    isActiveItem(item.href)
+                      ? 'block py-2 text-base font-medium text-[#0090FF]'
+                      : 'block py-2 text-base font-medium text-[#828282] hover:text-[#0090FF]'
                   }
-                  onClick={() => setIsMenuOpen(false)} // Tutup menu setelah klik
+                  onClick={() => setIsMenuOpen(false)}
                   end={item.href === "/"}
                 >
                   {item.name}
