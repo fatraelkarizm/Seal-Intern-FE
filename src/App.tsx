@@ -1,5 +1,3 @@
-// src/App.jsx
-
 // BrowserRouter
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
@@ -16,22 +14,16 @@ import {
   Nasional,
   Olahraga,
   Terbaru,
+  Kontak,
+  Laporan,
+  Kebijakan
 } from "@/pages";
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/*
-          Route induk ini akan merender LayoutDefault.
-          Semua <Route> yang didefinisikan di dalam ini akan menjadi anak-anaknya
-          dan akan dirender di dalam <Outlet /> di LayoutDefault.
-        */}
         <Route path="/" element={<LayoutDefault />}>
-          {/*
-            Definisikan semua rute anak langsung di sini.
-            Path-nya akan relatif terhadap parent LayoutDefault.
-          */}
           <Route index element={<Landing />} />
           <Route path="gayahidup" element={<GayaHidup />} />
           <Route path="hiburan" element={<Hiburan />} />
@@ -39,8 +31,11 @@ const App: React.FC = () => {
           <Route path="nasional" element={<Nasional />} />
           <Route path="olahraga" element={<Olahraga />} />
           <Route path="terbaru" element={<Terbaru />} />
+          <Route path="laporan" element={<Laporan />} />
+          <Route path="kebijakan" element={<Kebijakan />} />
+          <Route path="kontak" element={<Kontak />} />
 
-          {/* Opsional: Rute untuk 404 Not Found (jika ada URL yang tidak cocok) */}
+          {/* If Necessary aja */}
           {/* <Route path="*" element={<div>Halaman Tidak Ditemukan (404)</div>} /> */}
         </Route>
       </Routes>

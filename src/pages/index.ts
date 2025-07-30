@@ -8,6 +8,9 @@ const Internasional = React.lazy(() => import("@/pages/Internasional"));
 const Nasional = React.lazy(() => import("@/pages/Nasional"));
 const Olahraga = React.lazy(() => import("@/pages/Olahraga"));
 const Terbaru = React.lazy(() => import("@/pages/Terbaru"));
+const Laporan = React.lazy(() => import("@/pages/Laporan"));
+const Kebijakan = React.lazy(() => import("@/pages/Kebijakan"));
+const Kontak = React.lazy(() => import("@/pages/Kontak"));
 
 export { 
      Hero, 
@@ -17,5 +20,8 @@ export {
      Internasional,
      Nasional,
      Olahraga,
-     Terbaru
+     Terbaru,
+     Laporan,
+     Kebijakan,
+     Kontak
 };

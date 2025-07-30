@@ -1,2 +1,4 @@
 import SealLogo from './Seal-Logo.webp'
-export { SealLogo };
+import SealLogoWhite from './Seal-Logo-White.webp'
+
+export { SealLogo, SealLogoWhite };
