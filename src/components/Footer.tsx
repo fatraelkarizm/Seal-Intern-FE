@@ -16,7 +16,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-[#2C3C4D] py-8 text-gray-300">
-      <div className="container mx-auto px-4 md:px-8">
+      <div className="container mx-auto md:px-8 lg:px-16">
         {/* Mobile Layout - Stack Vertically */}
         <div className="block md:hidden space-y-8">
           {/* Logo & Copyright */}
